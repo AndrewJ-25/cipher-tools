@@ -1,4 +1,6 @@
 .DS_Store
+corpus
+playground.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
