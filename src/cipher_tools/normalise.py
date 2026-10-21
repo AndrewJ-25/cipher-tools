@@ -26,7 +26,7 @@ def split_blocks(text, n, padding=False, padding_character="X"):
     :param n: integer
     :param padding: boolean (pad uneven block)
     :param padding_character: string
-    :return: list
+    :return: [string]
     """
 
     if padding:
@@ -48,13 +48,37 @@ def split_blocks(text, n, padding=False, padding_character="X"):
     return split_text
 
 def split_columns(text, n, padding=False, padding_character="X"):
-    columns = ["" for _ in range(n)]
-    blocks = split_blocks(text, n, padding, padding_character)
+    """
+    split text into n columns
+    :param text: string
+    :param n: integer
+    :param padding: boolean
+    :param padding_character: string
+    :return: [string]
+    """
+    if padding:
+        text += padding_character * ((n - len(text)%n)%n)
 
-    for block in blocks:
-        for i in range(len(block)):
-            columns[i] += block[i]
+    columns = ["" for _ in range(n)]
+    for i in range(len(text)):
+        columns[i % n] += text[i]
     return columns
+
+def assemble_columns(columns):
+    """
+    assemble a list of columns
+    :param columns: [string]
+    :return: string
+    """
+    text = ""
+    for pos in range(len(columns[0])):
+        for column in columns:
+            # clunky!! fix later
+            try:
+                text += column[pos]
+            except:
+                pass
+    return text
 
 if __name__ == "__main__":
     with open("../../corpus/natural-text.txt") as text:
@@ -64,4 +88,6 @@ if __name__ == "__main__":
     stripped_text = strip(text)
     blocks = split_blocks("ABCDEF", 1, padding=True)
     columns = split_columns("ABCDEFG", 3, padding=True)
+    reassembled = assemble_columns(columns)
     print(columns)
+    print(reassembled)
