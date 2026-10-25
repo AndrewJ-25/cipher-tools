@@ -20,4 +20,6 @@ def ioc(text):
         return 0
 
 if __name__ == "__main__":
-    print(ioc(""))
+    with open("../../../corpus/normalised-text.txt") as text:
+        text = text.read()
+    print(ioc(text))
