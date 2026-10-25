@@ -1,4 +1,5 @@
-import frequency
+from src.cipher_tools.analysis import frequency
+
 
 def shift(text, n):
     """
@@ -13,3 +14,11 @@ def crack(text):
     n = (ord(frequency.common_letter(text)) - 69) % 26
 
     return shift(text, -n)
+
+if __name__ == "__main__":
+    with open("../../corpus/normalised-text.txt") as text:
+        text = text.read()
+
+    text = shift(text, 7)
+    print(text)
+    print(crack(text))
