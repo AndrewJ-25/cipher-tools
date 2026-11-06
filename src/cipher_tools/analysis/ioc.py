@@ -1,4 +1,4 @@
-import frequency
+from . import frequency
 
 def ioc(text):
     """
