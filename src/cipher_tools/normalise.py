@@ -80,6 +80,9 @@ def assemble_columns(columns):
                 pass
     return text
 
+def read_columns(columns):
+    return "".join(columns)
+
 if __name__ == "__main__":
     with open("../../corpus/natural-text.txt") as text:
         text = text.read()
