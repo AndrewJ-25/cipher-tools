@@ -47,6 +47,9 @@ def split_blocks(text, n, padding=False, padding_character="X"):
 
     return split_text
 
+def assemble_blocks(columns):
+    return "".join(columns)
+
 def split_columns(text, n, padding=False, padding_character="X"):
     """
     split text into n columns
@@ -79,9 +82,6 @@ def assemble_columns(columns):
             except:
                 pass
     return text
-
-def read_columns(columns):
-    return "".join(columns)
 
 if __name__ == "__main__":
     with open("../../corpus/natural-text.txt") as text:

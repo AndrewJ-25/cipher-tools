@@ -3,10 +3,10 @@ from pathlib import Path
 
 #necessary for loading linguistic data from text file, filepath relative to this module
 MODULE_DIR = Path(__file__).resolve().parent
-FILEPATH_TRIGRAM_FREQUENCY = "linguistic_data/trigram_frequency.txt"
-FILEPATH_TRIGRAM_FREQUENCY_LOGS = "linguistic_data/trigram_frequency_logs.txt"
-FILEPATH_TETRAGRAM_FREQUENCY = "linguistic_data/tetragram_frequency.txt"
-FILEPATH_TETRAGRAM_FREQUENCY_LOGS = "linguistic_data/tetragram_frequency_logs.txt"
+FILEPATH_TRIGRAM_FREQUENCY = MODULE_DIR / "linguistic_data" / "trigram_frequency.txt"
+FILEPATH_TRIGRAM_FREQUENCY_LOGS = MODULE_DIR / "linguistic_data" / "trigram_frequency_logs.txt"
+FILEPATH_TETRAGRAM_FREQUENCY = MODULE_DIR / "linguistic_data" / "tetragram_frequency.txt"
+FILEPATH_TETRAGRAM_FREQUENCY_LOGS = MODULE_DIR / "linguistic_data" / "tetragram_frequency_logs.txt"
 
 def load_data(filepath):
     with open(filepath) as data:

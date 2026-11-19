@@ -1,10 +1,21 @@
 """
-EXAMPLE:
-    Key         201
-    Plaintext   abc
-    Ciphertext  bca
+SPLITTING:
+    Write by rows, read by rows:
+        - encrypt and decrypt use same grid construction procedure
 
-double encrypting returns to original???
+    Write by rows, read by columns:
+        - Encrypt:
+            split columns, join columns
+        - Decrypt:
+            split blocks, assemble columns
+
+PERMUTATIONS:
+    EXAMPLE:
+        Key         201
+        Plaintext   abc
+        Ciphertext  bca
+
+    double encrypting returns to original???
 """
 
 import random
@@ -12,15 +23,47 @@ import copy
 from . import normalise
 from .analysis import fitness
 
+def permute(columns, key):
+    """
+    scramble columns
+    :param columns: []
+    :param key: [int]
+    :return: []
+    """
+    return list(map(columns.__getitem__, key))
+
+def encrypt_simple(text, key):
+    """
+    write by rows, read by columns
+    :param text: string
+    :param key: [int]
+    :return: string
+    """
+    return
+
+def decrypt_simple(text, key):
+    """
+    write by rows, read by columns
+    :param text: string
+    :param key: [int]
+    :return: string
+    """
+    column_size = len(text) // len(key)
+    columns = normalise.split_blocks(text, column_size)
+    print(columns)
+    columns = permute(columns, key)
+    plaintext = normalise.assemble_columns(columns)
+    return plaintext
+
 def decrypt(text, key):
     """
+    write by rows, read by rows
     :param text: string
     :param key: [int]
     :return: string
     """
     columns = normalise.split_columns(text, len(key))
-    columns = list(map(columns.__getitem__, key))
-    return normalise.assemble_columns(columns)
+    return normalise.assemble_columns(permute(columns, key))
 
 
 def climb(text, key_length):
